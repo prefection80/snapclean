@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+snapclean_fonts/
+snapclean_words.txt
+snapclean_setup_report.txt
+snapclean_gpu_test.txt
+snapclean_error.log
+snapclean_help.html
