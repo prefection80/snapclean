@@ -30,15 +30,26 @@ In the default *Strict* mode a word is replaced with real text only when the rea
 passes the checks. Anything else is left as a picture of itself, or typed in and highlighted in
 yellow, so you know where to proof-read. A review window lets you settle the leftovers quickly.
 
+## Requirements
+
+- **Python 3.12 or 3.13** - what the program is made for and tested on. Get it from
+  [python.org](https://www.python.org/downloads/).
+- A newer Python (3.14 and later) also works on Windows: the first time it starts, the program
+  installs Python 3.13 beside yours and restarts itself in that, because the better text reader
+  has no build for the newest Pythons yet. Python older than 3.10 is refused with a message.
+- **Windows 10 or 11.** That is where it was developed and is used.
+- **An internet connection for the first start**, which installs the Python packages the program
+  uses and the Tesseract text reader. After that it runs offline.
+- A graphics card is used for reading when one is found (DirectML or CUDA). It is not required.
+
+Not sure which Python you have? Run `python --version`. Once the program is open, the line at the
+bottom of its window says which Python it is running in.
+
 ## Running it
 
 ```
 python snapclean.py
 ```
-
-You need Python 3 and, for the first start, an internet connection: the program installs the Python
-packages it uses and the Tesseract text reader by itself. It was developed on Windows. A graphics
-card is used for reading when one is found (DirectML or CUDA), and is not required.
 
 **Help > How to use this program...** (or F1) explains every tab and option. The same text is in
 [HELP.html](HELP.html).

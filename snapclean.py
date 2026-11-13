@@ -72,7 +72,25 @@ from dataclasses import dataclass
 from pathlib import Path
 
 APP = "SnapClean"
-VERSION = "1.51"
+VERSION = "1.52"
+PYTHON_TESTED = "3.12 or 3.13"
+
+if sys.version_info < (3, 10):
+    # said plainly, before anything fails further on in a way that explains nothing
+    _old = ("%s needs Python %s.\n\nThis is Python %d.%d, which is too old for the packages it uses.\n"
+            "Install Python 3.13 from python.org and start the program with that."
+            % (APP, PYTHON_TESTED, sys.version_info[0], sys.version_info[1]))
+    print(_old)
+    try:
+        import tkinter as _tk
+        from tkinter import messagebox as _mb
+        _r = _tk.Tk()
+        _r.withdraw()
+        _mb.showerror(APP, _old)
+        _r.destroy()
+    except Exception:
+        pass
+    sys.exit(1)
 HERE = Path(__file__).resolve().parent
 LOG = HERE / "snapclean_error.log"
 IS_WINDOWS = sys.platform.startswith("win")
@@ -10406,6 +10424,12 @@ Forgets what was found and looks again. Use it after installing a new graphics d
 
 # Test the graphics card...
 Tries each graphics card on its own - first the underlying engine, then the text reader - and shows what happens, with the reason for anything that fails. The result is saved as snapclean_gpu_test.txt beside the program. Use it when the log says a card was detected but the reader could not start on it.
+
+# Which Python
+- Python 3.12 or 3.13 is what the program is made for and tested on. Get it from python.org.
+- A newer Python (3.14 and later) also works on Windows: the better text reader has no version for it yet, so the first time it starts the program installs Python 3.13 beside yours and restarts itself in that. Nothing of yours is changed.
+- Python older than 3.10 is refused with a message.
+- The line at the bottom of the window, and Setup > "How this program is running...", say which Python is in use.
 
 # What the program installs by itself
 The first time it starts it fetches what it needs: the Python packages it uses, the Tesseract text reader, and - if the Python it was started with is too new for the RapidOCR reader - a second Python to run in. This happens once and can take a few minutes.
